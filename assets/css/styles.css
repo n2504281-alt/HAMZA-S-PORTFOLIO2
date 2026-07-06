@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* 1. Imports & Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Outfit:wght@700;800;900&display=swap');
 
 /* 2. Custom Properties (Theme Colors) */
 :root {
@@ -221,10 +221,11 @@ section {
 
 /* Logo: Muhammad Hamza custom brand identity */
 .nav-logo {
-  font-family: var(--font-headings);
-  font-weight: 800; /* Bold weight */
-  font-size: 1.35rem;
-  letter-spacing: 0.05em;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900; /* Extra bold black weight */
+  font-size: 1.55rem;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -233,6 +234,14 @@ section {
   padding: 0.2rem 0;
   transition: all var(--transition-speed) ease;
   display: inline-block;
+}
+
+.nav-logo .dot {
+  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .nav-logo::after {
@@ -1141,7 +1150,8 @@ textarea.form-control {
 .reveal h1,
 .reveal h2 {
   opacity: 0;
-  transform: translateY(30px) scale(0.96);
+  transform: translateY(60px) skewY(3deg) scale(0.95);
+  transform-origin: left top;
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1149,7 +1159,7 @@ textarea.form-control {
 .reveal.active h1,
 .reveal.active h2 {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0) skewY(0) scale(1);
 }
 
 /* Delays for elements nested under active reveal classes */
@@ -1309,4 +1319,156 @@ textarea.form-control {
   .contact-info-card {
     padding: 1.75rem;
   }
+}
+
+/* 13. Footer Tagline Shifting Gradient Animation */
+.footer-tagline {
+  font-size: 1.35rem !important; /* Slightly larger, very prominent */
+  font-weight: 800 !important; /* Extra bold */
+  line-height: 1.5;
+  max-width: 480px;
+  background: linear-gradient(135deg, #D69A67 0%, #FAF8F5 35%, #F0B67F 70%, #C67C4E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 8s ease infinite alternate;
+  background-size: 200% 200%;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 14. Floating WhatsApp Button & Modal */
+.whatsapp-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #25D366;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-float svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  fill: currentColor;
+}
+
+.whatsapp-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+}
+
+.whatsapp-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.whatsapp-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(23, 20, 18, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.whatsapp-modal-content {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  width: 90%;
+  max-width: 380px;
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 1001;
+  text-align: center;
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.whatsapp-modal.active .whatsapp-modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.whatsapp-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  line-height: 1;
+}
+
+.whatsapp-modal-close:hover {
+  color: var(--text);
+}
+
+.whatsapp-modal-header h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.whatsapp-modal-header p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.whatsapp-qr-wrapper {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  padding: 1rem;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 1.25rem;
+}
+
+.whatsapp-qr-img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  display: block;
+}
+
+.whatsapp-modal-footer p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }

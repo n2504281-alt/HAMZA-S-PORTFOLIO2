@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeBtn = document.getElementById('theme-btn');
   const htmlElement = document.documentElement;
 
-  // Retrieve theme preference or default to light
-  const currentTheme = localStorage.getItem('theme') || 'light';
+  // Retrieve theme preference or default to dark
+  const currentTheme = localStorage.getItem('theme') || 'dark';
   htmlElement.setAttribute('data-theme', currentTheme);
 
   themeBtn.addEventListener('click', () => {
@@ -96,12 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. Scroll Reveal Effect (Intersection Observer)
   const revealElements = document.querySelectorAll('.reveal');
 
-  const revealObserver = new IntersectionObserver((entries, observer) => {
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
-        // Stop observing once revealed to maintain simplicity
-        observer.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove('active');
       }
     });
   }, {
@@ -112,4 +112,35 @@ document.addEventListener('DOMContentLoaded', () => {
   revealElements.forEach(element => {
     revealObserver.observe(element);
   });
+
+  // 6. WhatsApp Modal Trigger Logic
+  const whatsappBtn = document.getElementById('whatsapp-btn');
+  const whatsappModal = document.getElementById('whatsapp-modal');
+  const whatsappCloseOverlay = document.getElementById('whatsapp-modal-close-overlay');
+  const whatsappCloseBtn = document.getElementById('whatsapp-modal-close-btn');
+
+  if (whatsappBtn && whatsappModal) {
+    const openModal = () => {
+      whatsappModal.classList.add('active');
+      whatsappModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; // Stop background scroll
+    };
+
+    const closeModal = () => {
+      whatsappModal.classList.remove('active');
+      whatsappModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = ''; // Resume background scroll
+    };
+
+    whatsappBtn.addEventListener('click', openModal);
+    whatsappCloseOverlay.addEventListener('click', closeModal);
+    whatsappCloseBtn.addEventListener('click', closeModal);
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && whatsappModal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  }
 });
