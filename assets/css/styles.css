@@ -1341,14 +1341,12 @@ textarea.form-control {
   100% { background-position: 0% 50%; }
 }
 
-/* 14. Floating WhatsApp Button & Modal */
 .whatsapp-float {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
   background-color: #25D366;
   color: #FFFFFF;
-  border: none;
   border-radius: 50%;
   width: 3.5rem;
   height: 3.5rem;
@@ -1356,7 +1354,6 @@ textarea.form-control {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-  cursor: pointer;
   z-index: 999;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
 }
@@ -1370,105 +1367,4 @@ textarea.form-control {
   width: 1.75rem;
   height: 1.75rem;
   fill: currentColor;
-}
-
-.whatsapp-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
-}
-
-.whatsapp-modal.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.whatsapp-modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(23, 20, 18, 0.85);
-  backdrop-filter: blur(8px);
-}
-
-.whatsapp-modal-content {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  width: 90%;
-  max-width: 380px;
-  padding: 2.5rem 2rem;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  z-index: 1001;
-  text-align: center;
-  transform: translateY(30px) scale(0.95);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.whatsapp-modal.active .whatsapp-modal-content {
-  transform: translateY(0) scale(1);
-}
-
-.whatsapp-modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1.25rem;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: color 0.3s ease;
-  line-height: 1;
-}
-
-.whatsapp-modal-close:hover {
-  color: var(--text);
-}
-
-.whatsapp-modal-header h3 {
-  font-size: 1.35rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--text);
-}
-
-.whatsapp-modal-header p {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
-}
-
-.whatsapp-qr-wrapper {
-  background-color: #FFFFFF;
-  border-radius: 16px;
-  padding: 1rem;
-  display: inline-block;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 1.25rem;
-}
-
-.whatsapp-qr-img {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-  display: block;
-}
-
-.whatsapp-modal-footer p {
-  font-size: 0.8rem;
-  color: var(--text-muted);
 }

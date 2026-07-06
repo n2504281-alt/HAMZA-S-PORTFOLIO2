@@ -113,34 +113,4 @@ document.addEventListener('DOMContentLoaded', () => {
     revealObserver.observe(element);
   });
 
-  // 6. WhatsApp Modal Trigger Logic
-  const whatsappBtn = document.getElementById('whatsapp-btn');
-  const whatsappModal = document.getElementById('whatsapp-modal');
-  const whatsappCloseOverlay = document.getElementById('whatsapp-modal-close-overlay');
-  const whatsappCloseBtn = document.getElementById('whatsapp-modal-close-btn');
-
-  if (whatsappBtn && whatsappModal) {
-    const openModal = () => {
-      whatsappModal.classList.add('active');
-      whatsappModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden'; // Stop background scroll
-    };
-
-    const closeModal = () => {
-      whatsappModal.classList.remove('active');
-      whatsappModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = ''; // Resume background scroll
-    };
-
-    whatsappBtn.addEventListener('click', openModal);
-    whatsappCloseOverlay.addEventListener('click', closeModal);
-    whatsappCloseBtn.addEventListener('click', closeModal);
-
-    // Close on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && whatsappModal.classList.contains('active')) {
-        closeModal();
-      }
-    });
-  }
 });
