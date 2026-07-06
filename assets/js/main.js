@@ -113,4 +113,58 @@ document.addEventListener('DOMContentLoaded', () => {
     revealObserver.observe(element);
   });
 
+  // Contact Form AJAX Submission
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    // Create elements to show success / error messages
+    const formStatus = document.createElement('div');
+    formStatus.className = 'form-status-message';
+    contactForm.appendChild(formStatus);
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.textContent;
+      
+      // Update UI to submitting state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending Message...';
+      formStatus.textContent = '';
+      formStatus.className = 'form-status-message';
+
+      const formData = {
+        name: document.getElementById('form-name').value,
+        email: document.getElementById('form-email').value,
+        message: document.getElementById('form-message').value
+      };
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/hamza03119488@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+          formStatus.classList.add('success');
+          contactForm.reset();
+        } else {
+          throw new Error('Failed to send message.');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        formStatus.textContent = 'Oops! There was an issue sending your message. Please try again.';
+        formStatus.classList.add('error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    });
+  }
 });

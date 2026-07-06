@@ -1368,3 +1368,30 @@ textarea.form-control {
   height: 1.75rem;
   fill: currentColor;
 }
+
+/* Contact Form Status Message Style */
+.form-status-message {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: none;
+  line-height: 1.4;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.form-status-message.success {
+  display: block;
+  background-color: rgba(37, 211, 102, 0.1);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  color: #25D366;
+}
+
+.form-status-message.error {
+  display: block;
+  background-color: rgba(235, 87, 87, 0.1);
+  border: 1px solid rgba(235, 87, 87, 0.3);
+  color: #eb5757;
+}
