@@ -1025,6 +1025,24 @@ textarea.form-control {
   color: #FAF8F5; /* Cream white text */
 }
 
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 5rem;
+}
+
+.footer-links-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 .footer-brand h3.footer-logo {
   font-size: 1.6rem;
   font-weight: 800; /* Extra bold */
