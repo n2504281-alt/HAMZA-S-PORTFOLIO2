@@ -163,6 +163,26 @@ section {
   position: relative;
   display: inline-block;
   padding-bottom: 0.75rem;
+  min-height: 3.875rem; /* Prevents height collapse during typewriter animation */
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 0.1s ease, text-shadow 0.3s ease;
+  cursor: default;
+  /* Premium Glow Effect */
+  text-shadow: 0 0 10px rgba(198, 124, 78, 0.15), 0 0 20px rgba(230, 161, 90, 0.05);
+}
+
+[data-theme="dark"] .section-header h2 {
+  text-shadow: 0 0 12px rgba(214, 154, 103, 0.25), 0 0 24px rgba(240, 182, 127, 0.1);
+}
+
+.section-header h2:hover {
+  text-shadow: 0 0 18px rgba(198, 124, 78, 0.4), 0 0 35px rgba(230, 161, 90, 0.2);
+}
+
+[data-theme="dark"] .section-header h2:hover {
+  text-shadow: 0 0 22px rgba(214, 154, 103, 0.5), 0 0 45px rgba(240, 182, 127, 0.25);
 }
 
 /* Accent animated underline */

@@ -93,15 +93,57 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', scrollActive);
   scrollActive();
 
-  // 5. Scroll Reveal Effect (Intersection Observer)
+  // 5. Scroll Reveal Effect & Typewriter Heading Animation (Intersection Observer)
   const revealElements = document.querySelectorAll('.reveal');
+  
+  // Initialize typewriter headings
+  const typewriterHeadings = document.querySelectorAll('.section-header h2');
+  typewriterHeadings.forEach(h2 => {
+    h2.dataset.originalText = h2.textContent.trim();
+    h2.textContent = '';
+    h2.classList.add('typewriter-heading');
+  });
+
+  const typeText = (element) => {
+    if (element.classList.contains('typing') || element.classList.contains('type-complete')) return;
+    element.classList.add('typing');
+    
+    const text = element.dataset.originalText;
+    let i = 0;
+    element.textContent = '';
+    
+    const interval = setInterval(() => {
+      if (i < text.length) {
+        element.textContent = text.substring(0, i + 1) + '|';
+        i++;
+      } else {
+        clearInterval(interval);
+        element.textContent = text;
+        element.classList.remove('typing');
+        element.classList.add('type-complete');
+      }
+    }, 60);
+  };
 
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
+        
+        // Trigger typewriter if this reveal container has a typewriter heading
+        const h2 = entry.target.querySelector('h2.typewriter-heading');
+        if (h2) {
+          typeText(h2);
+        }
       } else {
         entry.target.classList.remove('active');
+        
+        // Reset typewriter heading so it animates again when scrolling back
+        const h2 = entry.target.querySelector('h2.typewriter-heading');
+        if (h2) {
+          h2.textContent = '';
+          h2.classList.remove('typing', 'type-complete');
+        }
       }
     });
   }, {
@@ -227,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 7. 3D Tilt Effect for All Cards, Images, and Headers
-  const tiltCards = document.querySelectorAll('#rating-card-3d, .tilt-card, .service-card, .additional-card, .browser-mockup, .contact-info-card, .portrait-frame, #hero-title-3d, .contact-form-wrapper');
+  const tiltCards = document.querySelectorAll('#rating-card-3d, .tilt-card, .service-card, .additional-card, .browser-mockup, .contact-info-card, .portrait-frame, #hero-title-3d, .contact-form-wrapper, .section-header h2');
 
   tiltCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
