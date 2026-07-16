@@ -250,4 +250,22 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0px)';
     });
   });
+
+  // 8. Scroll to Top Button
+  const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollToTopBtn.classList.add('show');
+    } else {
+      scrollToTopBtn.classList.remove('show');
+    }
+  });
+
+  scrollToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
 });
