@@ -379,10 +379,35 @@ section {
 }
 
 .hero-content h1 {
-  font-size: 3.5rem;
-  font-weight: 600; /* Manrope SemiBold */
+  font-size: 3.85rem;
+  font-weight: 800; /* Bolder for volumetric typography */
   line-height: 1.15;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 0.1s ease;
+}
+
+/* 3D Volumetric Extrusion using layered text-shadows */
+[data-theme="dark"] #hero-title-3d {
+  text-shadow: 
+    0 1px 0 #2c2622,
+    0 2px 0 #25201d,
+    0 3px 0 #1f1b18,
+    0 4px 0 #171412,
+    0 5px 6px rgba(0, 0, 0, 0.5),
+    0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] #hero-title-3d {
+  text-shadow: 
+    0 1px 0 #e6dfd5,
+    0 2px 0 #dbd4ca,
+    0 3px 0 #cfc8be,
+    0 4px 0 #c2bbb1,
+    0 5px 6px rgba(0, 0, 0, 0.15),
+    0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Accent animation for highlighted words */
@@ -393,18 +418,38 @@ section {
   animation: highlightPulse 3s ease-in-out infinite alternate;
 }
 
+[data-theme="dark"] #hero-title-3d .highlight-word {
+  text-shadow: 
+    0 1px 0 #b3734a,
+    0 2px 0 #9c623d,
+    0 3px 0 #855231,
+    0 4px 0 #6e4225,
+    0 5px 8px rgba(214, 154, 103, 0.4),
+    0 10px 15px rgba(214, 154, 103, 0.2);
+}
+
+[data-theme="light"] #hero-title-3d .highlight-word {
+  text-shadow: 
+    0 1px 0 #b36e42,
+    0 2px 0 #9c5c35,
+    0 3px 0 #854d28,
+    0 4px 0 #6e3d1b,
+    0 5px 8px rgba(198, 124, 78, 0.3),
+    0 10px 15px rgba(198, 124, 78, 0.15);
+}
+
 @keyframes highlightPulse {
   0% {
     color: var(--primary);
-    transform: scale(1);
+    transform: scale(1) translateZ(10px);
   }
   50% {
     color: var(--accent);
-    transform: scale(1.02);
+    transform: scale(1.02) translateZ(15px);
   }
   100% {
     color: var(--primary);
-    transform: scale(1);
+    transform: scale(1) translateZ(10px);
   }
 }
 
@@ -448,6 +493,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: portraitFloat 6s ease-in-out infinite; /* Floating animation applied to container */
 }
 
 .portrait-frame {
@@ -460,8 +506,9 @@ section {
   border: 1px solid var(--border); /* Thin accent border */
   box-shadow: var(--shadow-lg); /* Soft premium shadow */
   background: linear-gradient(180deg, rgba(230, 161, 90, 0.04) 0%, rgba(198, 124, 78, 0.04) 100%);
-  animation: portraitFloat 6s ease-in-out infinite; /* Subtle floating animation */
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  transition: transform 0.1s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 @keyframes portraitFloat {
@@ -471,8 +518,8 @@ section {
 }
 
 .portrait-frame:hover {
-  transform: scale(1.01) translateY(-10px);
-  box-shadow: 0 25px 50px rgba(198, 124, 78, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 25px 50px rgba(198, 124, 78, 0.15);
 }
 
 .portrait-img {
