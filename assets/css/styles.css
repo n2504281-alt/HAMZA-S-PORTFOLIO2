@@ -162,6 +162,7 @@ section {
 .about-content h2 {
   position: relative;
   display: inline-block;
+  font-weight: 800; /* Matching bold font-weight for all section headings */
   perspective: 1000px;
   transform-style: preserve-3d;
   backface-visibility: hidden;
