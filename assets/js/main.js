@@ -97,11 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const revealElements = document.querySelectorAll('.reveal');
   
   // Initialize typewriter headings
-  const typewriterHeadings = document.querySelectorAll('.section-header h2');
-  typewriterHeadings.forEach(h2 => {
-    h2.dataset.originalText = h2.textContent.trim();
-    h2.textContent = '';
-    h2.classList.add('typewriter-heading');
+  const typewriterHeadings = document.querySelectorAll('.section-header h2, .additional-header h3, .about-content h2');
+  typewriterHeadings.forEach(heading => {
+    heading.dataset.originalText = heading.textContent.trim();
+    heading.textContent = '';
+    heading.classList.add('typewriter-heading');
   });
 
   const typeText = (element) => {
@@ -131,18 +131,18 @@ document.addEventListener('DOMContentLoaded', () => {
         entry.target.classList.add('active');
         
         // Trigger typewriter if this reveal container has a typewriter heading
-        const h2 = entry.target.querySelector('h2.typewriter-heading');
-        if (h2) {
-          typeText(h2);
+        const heading = entry.target.querySelector('.typewriter-heading');
+        if (heading) {
+          typeText(heading);
         }
       } else {
         entry.target.classList.remove('active');
         
         // Reset typewriter heading so it animates again when scrolling back
-        const h2 = entry.target.querySelector('h2.typewriter-heading');
-        if (h2) {
-          h2.textContent = '';
-          h2.classList.remove('typing', 'type-complete');
+        const heading = entry.target.querySelector('.typewriter-heading');
+        if (heading) {
+          heading.textContent = '';
+          heading.classList.remove('typing', 'type-complete');
         }
       }
     });
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 7. 3D Tilt Effect for All Cards, Images, and Headers
-  const tiltCards = document.querySelectorAll('#rating-card-3d, .tilt-card, .service-card, .additional-card, .browser-mockup, .contact-info-card, .portrait-frame, #hero-title-3d, .contact-form-wrapper, .section-header h2');
+  const tiltCards = document.querySelectorAll('#rating-card-3d, .tilt-card, .service-card, .additional-card, .browser-mockup, .contact-info-card, .portrait-frame, #hero-title-3d, .contact-form-wrapper, .section-header h2, .additional-header h3, .about-content h2');
 
   tiltCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
