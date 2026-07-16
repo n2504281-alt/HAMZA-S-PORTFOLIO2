@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 7. 3D Tilt Effect for All Cards, Images, and Headers
-  const tiltCards = document.querySelectorAll('#rating-card-3d, .tilt-card, .service-card, .additional-card, .browser-mockup, .contact-info-card, .portrait-frame, #hero-title-3d');
+  const tiltCards = document.querySelectorAll('#rating-card-3d, .tilt-card, .service-card, .additional-card, .browser-mockup, .contact-info-card, .portrait-frame, #hero-title-3d, .contact-form-wrapper');
 
   tiltCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
