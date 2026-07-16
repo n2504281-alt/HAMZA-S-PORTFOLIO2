@@ -167,4 +167,87 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // 6. Testimonials Section Animations (Count-up & Star Pop-in)
+  const testimonialsSection = document.getElementById('testimonials');
+  const ratingVal = document.getElementById('rating-val');
+  const stars = document.querySelectorAll('#animated-stars .star-icon');
+  let testimonialsAnimated = false;
+
+  const animateTestimonials = () => {
+    if (testimonialsAnimated) return;
+    testimonialsAnimated = true;
+
+    // A. Rating Count-up Animation
+    const targetRating = 4.9;
+    const duration = 1500; // 1.5s
+    const startTime = performance.now();
+
+    const updateCount = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Smooth ease-out quad function for counting
+      const easeProgress = progress * (2 - progress);
+      const currentVal = (easeProgress * targetRating).toFixed(1);
+      
+      ratingVal.textContent = currentVal;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        ratingVal.textContent = targetRating.toFixed(1);
+      }
+    };
+
+    requestAnimationFrame(updateCount);
+
+    // B. Stars Pop-in Animation (Sequential delays)
+    stars.forEach((star, index) => {
+      setTimeout(() => {
+        star.classList.add('active');
+      }, index * 200); // 200ms delay between each star
+    });
+  };
+
+  if (testimonialsSection) {
+    const testimonialObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateTestimonials();
+          // Unobserve to trigger only once
+          testimonialObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    testimonialObserver.observe(testimonialsSection);
+  }
+
+  // 7. 3D Tilt Effect for Testimonial Cards
+  const tiltCards = document.querySelectorAll('#rating-card-3d, .tilt-card');
+
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left; // x position within element
+      const y = e.clientY - rect.top;  // y position within element
+      
+      const width = rect.width;
+      const height = rect.height;
+      
+      // Calculate rotation based on cursor position (-15 to 15 degrees)
+      const rotateX = -((y / height) - 0.5) * 15;
+      const rotateY = ((x / width) - 0.5) * 15;
+      
+      card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-5px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      // Reset card position smoothly
+      card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0px)';
+    });
+  });
 });
